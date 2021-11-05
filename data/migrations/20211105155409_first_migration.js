@@ -23,6 +23,7 @@ exports.up = function(knex) {
             .inTable('projects')
             .onUpdate('RESTRICT')
             .onDelete('RESTRICT')
+    })
     .createTable('project_resources', table => {
         table.increments('project_resources_id')
         table.integer('project_id')
@@ -39,7 +40,6 @@ exports.up = function(knex) {
             .inTable('resources')
             .onUpdate('RESTRICT')
             .onDelete('RESTRICT')
-    })
     })
 };
 

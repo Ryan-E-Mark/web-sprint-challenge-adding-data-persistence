@@ -1,10 +1,12 @@
 const express = require('express')
+const Resources = require('./model')
 
 const router = express.Router()
 
 router.get('/', async (req, res, next) => {
     try {
-        res.send('GET REQUEST for api/resources connected')
+        const resources = await Resources.getResources()
+        res.status(200).json(resources)
     } catch (err) {
         next(err)
     }
@@ -12,7 +14,8 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        res.send('POST REQUEST for api/resources connected')
+        const newResource = await Resources.postResource(req.body)
+        res.status(201).json(newResource)
     } catch (err) {
         next(err)
     }

@@ -1,8 +1,8 @@
 const db = require('../../data/dbConfig')
 
 async function postTask(task) {
-    const newTask = await db('tasks').insert(task)
-    return newTask
+    const newTaskId = await db('tasks').insert(task)
+    return db('tasks').where('task_id', newTaskId).first()
 }
 
 function getTasks() {

@@ -1,10 +1,12 @@
 const express = require('express')
+const Tasks = require('./model')
 
 const router = express.Router()
 
 router.get('/', async (req, res, next) => {
     try {
-        res.send('GET REQUEST for api/tasks connected')
+        const tasks = await Tasks.getTasks()
+        res.status(200).json(tasks)
     } catch (err) {
         next(err)
     }
@@ -12,7 +14,8 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        res.send('POST REQUEST for api/tasks connected')
+        const newTask = await Tasks.postTask(req.body)
+        res.status(201).json(newTask)
     } catch (err) {
         next(err)
     }
